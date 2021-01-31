@@ -1,0 +1,102 @@
+<?xml version="1.0" ?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+			<item name="provider" xsi:type="string">rukshan_customprice_customprice_form.customprice_form_data_source</item>
+		</item>
+		<item name="label" translate="true" xsi:type="string">General Information</item>
+		<item name="template" xsi:type="string">templates/form/collapsible</item>
+	</argument>
+	<settings>
+		<buttons>
+			<button class="Rukshan\CustomPrice\Block\Adminhtml\CustomPrice\Edit\BackButton" name="back"/>
+			<button class="Rukshan\CustomPrice\Block\Adminhtml\CustomPrice\Edit\DeleteButton" name="delete"/>
+			<button class="Rukshan\CustomPrice\Block\Adminhtml\CustomPrice\Edit\SaveButton" name="save"/>
+			<button class="Rukshan\CustomPrice\Block\Adminhtml\CustomPrice\Edit\SaveAndContinueButton" name="save_and_continue"/>
+		</buttons>
+		<namespace>rukshan_customprice_customprice_form</namespace>
+		<dataScope>data</dataScope>
+		<deps>
+			<dep>rukshan_customprice_customprice_form.customprice_form_data_source</dep>
+		</deps>
+	</settings>
+	<dataSource name="customprice_form_data_source">
+		<argument name="data" xsi:type="array">
+			<item name="js_config" xsi:type="array">
+				<item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+			</item>
+		</argument>
+		<settings>
+			<submitUrl path="*/*/save"/>
+		</settings>
+		<dataProvider class="Rukshan\CustomPrice\Model\CustomPrice\DataProvider" name="customprice_form_data_source">
+			<settings>
+				<requestFieldName>customprice_id</requestFieldName>
+				<primaryFieldName>customprice_id</primaryFieldName>
+			</settings>
+		</dataProvider>
+	</dataSource>
+	<fieldset name="general">
+		<settings>
+			<label>General</label>
+		</settings>
+		<field formElement="input" name="customer_email" sortOrder="10">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">CustomPrice</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Customer Email</label>
+				<dataScope>customer_email</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field>
+        <field name="from_date" formElement="date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">CustomPrice</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="validate-date" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">From</label>
+                <dataScope>from_date</dataScope>
+            </settings>
+        </field>
+        <field name="to_date" formElement="date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">CustomPrice</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="validate-date" xsi:type="boolean">true</rule>
+                    <rule name="validate-date-range" xsi:type="string">from_date</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">To</label>
+                <dataScope>to_date</dataScope>
+            </settings>
+        </field>
+	</fieldset>
+    <fieldset name="assign_products" sortOrder="40">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">Products with Custom Price</label>
+        </settings>
+        <container name="customprice_assign_products_container" sortOrder="160">
+            <htmlContent name="html_content">
+                <block name="gallery1" class="Rukshan\CustomPrice\Block\Adminhtml\CustomPrice\AssignProducts"/>
+            </htmlContent>
+        </container>
+    </fieldset>
+</form>
+

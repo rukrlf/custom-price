@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Rukshan\CustomPrice\Api\CustomPriceRepositoryInterface" type="Rukshan\CustomPrice\Model\CustomPriceRepository"/>
+	<preference for="Rukshan\CustomPrice\Api\Data\CustomPriceInterface" type="Rukshan\CustomPrice\Model\Data\CustomPrice"/>
+	<preference for="Rukshan\CustomPrice\Api\Data\CustomPriceSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Rukshan\CustomPrice\Model\ResourceModel\CustomPrice\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">rukshan_customprice_customprice</argument>
+			<argument name="resourceModel" xsi:type="string">Rukshan\CustomPrice\Model\ResourceModel\CustomPrice\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="rukshan_customprice_customprice_listing_data_source" xsi:type="string">Rukshan\CustomPrice\Model\ResourceModel\CustomPrice\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+    <type name="Magento\Framework\App\Http\Context">
+        <arguments>
+            <argument name="default" xsi:type="array">
+                <item name="customer_email" xsi:type="const">Rukshan\CustomPrice\Plugin\Model\Product::CUSTOMER_EMAIL_NULL</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

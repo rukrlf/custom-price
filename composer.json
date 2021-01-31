@@ -1,0 +1,22 @@
+{
+    "name": "rukshan/module-customprice",
+    "description": "Custom Price for logged user",
+    "type": "magento2-module",
+    "license": "OSL-3.0",
+    "authors": [
+        {
+            "email": "rukrlf@gmail.com",
+            "name": "Rukshan Fernando"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Rukshan\\CustomPrice\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

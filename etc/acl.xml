@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="Rukshan_CustomPrice::CustomPrice" sortOrder="10" title="CustomPrice">
+					<resource id="Rukshan_CustomPrice::CustomPrice_save" sortOrder="10" title="Save CustomPrice"/>
+					<resource id="Rukshan_CustomPrice::CustomPrice_delete" sortOrder="20" title="Delete CustomPrice"/>
+					<resource id="Rukshan_CustomPrice::CustomPrice_update" sortOrder="30" title="Update CustomPrice"/>
+					<resource id="Rukshan_CustomPrice::CustomPrice_view" sortOrder="40" title="View CustomPrice"/>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

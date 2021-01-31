@@ -1,0 +1,27 @@
+<?php
+/**
+ * Copyright © rukshan All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Rukshan\CustomPrice\Block\Adminhtml\CustomPrice\AssignProducts $block */
+/** @var \Rukshan\CustomPrice\Block\Adminhtml\CustomPrice\Tab\Product $blockGrid */
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+
+$blockGrid = $block->getBlockGrid();
+$gridJsObjectName = $blockGrid->getJsObjectName();
+?>
+<?= $block->getGridHtml() ?>
+<input type="hidden" name="customprice_products" id="in_customprice_products" data-form-part="rukshan_customprice_customprice_form" value="" />
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Rukshan_CustomPrice/products/assign-products": {
+                "selectedProducts": <?= /* @noEscape */ $block->getProductsJson() ?>,
+                "gridJsObjectName": <?= /* @noEscape */ '"' . $gridJsObjectName . '"' ?: '{}' ?>
+            }
+        }
+    }
+</script>
+<!-- @todo remove when "UI components" will support such initialization -->
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], "require('mage/apply/main').apply();", false) ?>

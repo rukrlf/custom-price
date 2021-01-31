@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table comment="rukshan_customprice_customprice Table" engine="innodb" name="rukshan_customprice_customprice" resource="default">
+		<column comment="Entity Id" identity="true" name="customprice_id" nullable="false" padding="6" unsigned="true" xsi:type="smallint"/>
+		<constraint referenceId="PRIMARY" xsi:type="primary">
+			<column name="customprice_id"/>
+		</constraint>
+		<column length="255" name="customer_email" nullable="true" xsi:type="varchar"/>
+		<column name="from_date" nullable="true" xsi:type="datetime"/>
+		<column name="to_date" nullable="true" xsi:type="datetime"/>
+	</table>
+	<table comment="rukshan_customprice_customprice_product Table" engine="innodb" name="rukshan_customprice_customprice_product" resource="default">
+		<column comment="Entity Id" identity="true" name="customprice_product_id" nullable="false" padding="6" unsigned="true" xsi:type="smallint"/>
+		<constraint referenceId="PRIMARY" xsi:type="primary">
+			<column name="customprice_product_id"/>
+		</constraint>
+		<column identity="false" name="customprice_id" nullable="true" xsi:type="int"/>
+		<column name="custom_special_price" nullable="true" precision="12" scale="4" xsi:type="decimal"/>
+		<column identity="false" name="product_id" nullable="false" xsi:type="int"/>
+	</table>
+</schema>

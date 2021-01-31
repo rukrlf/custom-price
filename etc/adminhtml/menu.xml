@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="Rukshan::top_level" module="Rukshan_CustomPrice" resource="Magento_Backend::content" sortOrder="9999" title="Rukshan"/>
+		<add action="rukshan_customprice/customprice/index" id="Rukshan_CustomPrice::rukshan_customprice_customprice" module="Rukshan_CustomPrice" parent="Rukshan::top_level" resource="Magento_Backend::content" sortOrder="9999" title="Custom Price"/>
+	</menu>
+</config>
