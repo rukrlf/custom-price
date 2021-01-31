@@ -7,6 +7,7 @@ declare(strict_types=1);
 
 namespace Rukshan\CustomPrice\Plugin\Model;
 
+use Magento\Customer\Model\SessionFactory;
 use Magento\Customer\Model\Session;
 use Magento\Framework\App\Http\Context;
 use Magento\Framework\App\ScopeInterface;
@@ -48,10 +49,14 @@ class Product
      * @var CustomPriceRepositoryInterface
      */
     private $customPriceRepository;
+    /**
+     * @var SessionFactory
+     */
+    private $customerSessionFactory;
 
     /**
      * Product constructor.
-     * @param Session $customerSession
+     * @param SessionFactory $customerSessionFactory
      * @param CustomPriceProductsRegistry $registry
      * @param TimezoneInterface $timezone
      * @param ScopeInterface $scope
@@ -59,14 +64,14 @@ class Product
      * @param CustomPriceRepositoryInterface $customPriceRepository
      */
     public function __construct(
-        Session $customerSession,
+        SessionFactory $customerSessionFactory,
         CustomPriceProductsRegistry $registry,
         TimezoneInterface $timezone,
         ScopeInterface $scope,
         Context $context,
         CustomPriceRepositoryInterface $customPriceRepository
     ) {
-        $this->customerSession = $customerSession;
+        $this->customerSessionFactory = $customerSessionFactory;
         $this->registry = $registry;
         $this->timezone = $timezone;
         $this->scope = $scope;
@@ -76,11 +81,11 @@ class Product
 
     public function afterGetPrice(\Magento\Catalog\Model\Product $subject, $result)
     {
-        $this->context->getValue(\Magento\Customer\Model\Context::CONTEXT_AUTH);
         if ($this->context->getValue(\Magento\Customer\Model\Context::CONTEXT_AUTH)) {
             if (!$this->registry->hasProducts()) {
-                $customerEmail = $this->customerSession->getCustomer()->getEmail();
-                $customerEmail = $customerEmail ?? $this->context->getValue(self::CUSTOMER_EMAIL);
+                /** @var Session $customerSession */
+                $customerSession = $this->customerSessionFactory->create();
+                $customerEmail = $customerSession->getCustomer()->getEmail();
                 $products = $this->customPriceRepository->getCustomerByEmail($customerEmail);
                 $this->registry->setProducts($products);
             }

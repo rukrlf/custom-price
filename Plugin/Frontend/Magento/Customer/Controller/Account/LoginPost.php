@@ -71,7 +71,6 @@ class LoginPost extends DataObject
                 $customerEmail = $this->customerSession->getCustomer()->getEmail();
                 $products = $this->customPriceRepository->getCustomerByEmail($customerEmail);
                 $this->registry->setProducts($products);
-                $this->context->setValue(Product::CUSTOMER_EMAIL, $customerEmail, null);
             } catch (LocalizedException $e) {
                 // Skip if something goes wrong
             }

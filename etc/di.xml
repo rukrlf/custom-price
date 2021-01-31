@@ -16,11 +16,4 @@
 			</argument>
 		</arguments>
 	</type>
-    <type name="Magento\Framework\App\Http\Context">
-        <arguments>
-            <argument name="default" xsi:type="array">
-                <item name="customer_email" xsi:type="const">Rukshan\CustomPrice\Plugin\Model\Product::CUSTOMER_EMAIL_NULL</item>
-            </argument>
-        </arguments>
-    </type>
 </config>
