@@ -56,6 +56,7 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         $items = $this->collection->getItems();
         foreach ($items as $model) {
             $this->loadedData[$model->getId()] = $model->getData();
+            $this->loadedData[$model->getId()]['data']['customer_email'] = $model->getData('customer_email');
         }
         $data = $this->dataPersistor->get('rukshan_customprice_customprice');
 
